@@ -10,7 +10,7 @@ import JobImage from '../../assets/images/jobs.png';
 const FilterSidebar = () => {
   const dispatch = useDispatch();
   const { isDarkMode } = useTheme();
-  const [value, setValue] = useState<[number, number]>([0, 100]);
+  const [value, setValue] = useState<[number, number]>([0, 200]);
 
   const handleChange = (event: any) => {
     dispatch(UpdateFilter({ salary: event }));
@@ -33,9 +33,9 @@ const FilterSidebar = () => {
         <div className="mb-4">
           <div className="flex justify-between">
             <div>Salary </div>
-            <div>&#8377;{value[0]}lpa - &#8377;{value[1]}lpa</div>
+            <div>&#8377;{value[0]}k - &#8377;{value[1]}k</div>
           </div>
-          <RangeSlider onChangeEnd={handleChange} size="xs" color="blue.4" max={100} value={value} labelTransitionProps={{
+          <RangeSlider onChangeEnd={handleChange} size="xs" color="blue.4" max={200} value={value} labelTransitionProps={{
             transition: 'skew-down',
             duration: 150,
             timingFunction: 'linear',
