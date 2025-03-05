@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Textarea, Loader, Progress, Card, FileInput, Title, Text, Modal } from "@mantine/core";
+import { Button, Loader, Progress, Card, FileInput, Title, Text, Modal } from "@mantine/core";
 import { IconReportAnalytics } from "@tabler/icons-react";
 import axios from "axios";
 import { getJob } from "../../Services/JobService";

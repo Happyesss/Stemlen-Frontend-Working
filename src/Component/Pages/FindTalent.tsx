@@ -1,5 +1,4 @@
 import { Divider } from "@mantine/core"
-import SearchBar from "../FindTalent/SearchBar"
 import Talents from "../FindTalent/Talents"
 
 const FindTalent = () => {

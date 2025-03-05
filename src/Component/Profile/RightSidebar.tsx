@@ -1,5 +1,5 @@
 import React from "react";
-import { IconMessage, IconPencil } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
 import { useTheme } from "../../ThemeContext";
 
 const RightSidebar: React.FC = () => {
