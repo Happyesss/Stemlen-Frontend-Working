@@ -53,7 +53,7 @@ const JobDesc = (props: any) => {
     <div className={`w-2/3 bs-mx:w-full ${isDarkMode ? 'bg-cape-cod-950 text-gray-200' : 'bg-cape-cod-10 text-black'}`}>
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
-          <div className={`p-3 rounded-xl ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
+          <div className={`p-3 rounded-xl sm-mx:p-1 ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
             {props.company && <img className="h-7" src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
           </div>
           <div>
@@ -76,23 +76,23 @@ const JobDesc = (props: any) => {
         </div>
       </div>
       <Divider my="xl" color='dark'/>
-      <div className="flex justify-around">
+      <div className="flex justify-around sm-mx:flex-wrap sm-mx:gap-4">
         {
           card.map((item: any, index: number) => <div key={index} className="flex flex-col items-center gap-1">
-            <ActionIcon className="!h-12 !w-12" color="blue.4" variant="transparent" radius="xl" aria-label="Settings">
+            <ActionIcon className="!h-12 !w-12 sm-mx:!h-10 sm-mx:!w-10 xs-mx:!h-8 xs-mx:!w-8" color="blue.4" variant="transparent" radius="xl" aria-label="Settings">
               <item.icon className="h-4/5 w-4/5" stroke={1.5} />
             </ActionIcon>
-            <div className={`text-sm ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>{item.name}</div>
-            <div className="font-semibold">{props ? props[item.id] : "NA"}{item.id == "packageOffered" && <>K</>}</div>
+            <div className={`text-sm ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'} sm-mx:text-xs xs-mx:text-[10px]`}>{item.name}</div>
+            <div className="font-semibold sm-mx:text-sm xs-mx:text-xs">{props ? props[item.id] : "NA"}{item.id == "packageOffered" && <>K</>}</div>
           </div>
           )}
       </div>
       <Divider my="xl" color='dark'/>
       <div>
-        <div className="text-xl font-semibold mb-5">Required Skills</div>
+        <div className="text-xl font-semibold mb-5 sm-mx:text-lg xs-mx:text-base">Required Skills</div>
         <div className="flex flex-wrap gap-2">{
           props?.skillsRequired?.map((skill: any, index: number) =>
-            <ActionIcon key={index} className="!h-fit font-medium !text-sm !w-fit" color="blue.4" p="xs" variant="light" radius="xl" aria-label="Settings">
+            <ActionIcon key={index} className="!h-fit font-medium !text-sm !w-fit " color="blue.4" p="xs" variant="light" radius="xl" aria-label="Settings">
               {skill}
             </ActionIcon>
           )}

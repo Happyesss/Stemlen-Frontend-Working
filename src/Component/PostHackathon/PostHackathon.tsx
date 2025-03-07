@@ -89,7 +89,7 @@ const PostHackathon = () => {
   };
 
   return (
-    <div className="w-4/5 mx-auto">
+    <div className="w-4/5 mx-auto md-mx:w-[92%]">
       <div className="text-2xl font-semibold mt-4 mb-5">Post Hackathon</div>
       <div className="flex flex-col gap-5">
         <div className={`flex gap-10 [&>*]:w-1/2 ${isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-900 [&_input]:!text-cape-cod-100 [&_input]:border-cape-cod-900 ' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}`}>
