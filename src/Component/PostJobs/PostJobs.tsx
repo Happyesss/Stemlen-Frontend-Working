@@ -1,8 +1,8 @@
-import { Button, NumberInput, TagsInput, Textarea } from "@mantine/core";
+import { Button, NumberInput, TagsInput, Textarea, TextInput } from "@mantine/core";
 import SelectInput from "./SelectInput";
 import TextEditor from "./TextEditor";
 import { content, fields } from "../../assets/Data/PostJob";
-import { isNotEmpty, useForm } from "@mantine/form";
+import { isNotEmpty, useForm, hasLength, matches } from "@mantine/form";
 import { getJob, postJob } from "../../Services/JobService";
 import { errorNotification, successNotification } from "../../Services/NotificationService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -48,6 +48,7 @@ const PostJobs = () => {
       skillsRequired: [],
       about: "",
       description: content,
+      applyUrl: "", 
     },
     validate: {
       jobTitle: isNotEmpty("Job Title is required"),
@@ -59,6 +60,11 @@ const PostJobs = () => {
       skillsRequired: isNotEmpty("Skills are required"),
       about: isNotEmpty("About is required"),
       description: isNotEmpty("Description is required"),
+      applyUrl: (value: string | null) => {
+        if (!value || value.trim() === "") return null; 
+        return matches(/^https?:\/\/[^\s$.?#].[^\s]*$/i, "Invalid URL")(value);
+      }
+      
     },
   });
 
@@ -106,6 +112,7 @@ const PostJobs = () => {
         </div>
         <TagsInput {...form.getInputProps("skillsRequired")} withAsterisk label="Skills" placeholder="Enter the skills" splitChars={[",", " ", "|"]} clearable acceptValueOnBlur styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000',borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
         <Textarea {...form.getInputProps("about")} withAsterisk label="About" placeholder="Enter the about" minRows={3} maxRows={6} styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000',borderColor: isDarkMode ? "transparent" : "#d1d5db"  } }} />
+        <TextInput {...form.getInputProps("applyUrl")} label="Apply URL" placeholder="Enter the apply URL" styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000', borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
         <div className=" [&_button[data-active='true']]:!text-blue-500 [&_button[data-active='true']]:!bg-blue-500/20  ">
           <div className="text-sm font-medium">Job Description <span className="text-red-500">*</span> </div>
           <TextEditor  form={form} data={editorData} />

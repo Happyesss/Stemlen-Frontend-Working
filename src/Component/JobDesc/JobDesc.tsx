@@ -54,17 +54,31 @@ const JobDesc = (props: any) => {
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className={`p-3 rounded-xl sm-mx:p-1 ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-            {props.company && <img className="h-7" src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
+            {props.company && <img className="h-7 " src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
           </div>
           <div>
-            <div className="font-semibold text-2xl">{props.jobTitle}</div>
-            <div className={`text-lg ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>{props.company} &bull; {timeAgo(props.postTime)} &bull; {props.applicants ? props.applicants.length : 0} Applicants </div>
+            <div className="font-semibold text-2xl sm-mx:text-xl">{props.jobTitle}</div>
+            <div className={`text-lg sm-mx:text-base ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>
+              {props.company} &bull; {timeAgo(props.postTime)}
+              {!props.applyUrl &&  ` • ${props.applicants ? props.applicants.length : 0} Applicants`}
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-2 items-center">
-          {(props.edit || !applied) && <Link to={props.edit ? `/post-job/${props.id}` : `/apply-job/${props.id}`}>
-            <Button color="blue.4" size="sm" variant='light'>{props.closed ? "Reopen" : props.edit ? "Edit" : "Apply"}</Button>
-          </Link>}
+          {(!props.applyUrl && (props.edit || !applied)) && (
+            <Link to={`/apply-job/${props.id}`}>
+              <Button color="blue.4" size="sm" variant="light">
+                {props.closed ? "Reopen" : props.edit ? "Edit" : "Apply"}
+              </Button>
+            </Link>
+          )}
+          {props.applyUrl && (
+            <a href={props.applyUrl} target="_blank" rel="noopener noreferrer">
+              <Button color="blue.4" size="sm" variant="light">
+                Apply Link
+              </Button>
+            </a>
+          )}
           {
             !props.edit && applied && <Button color="blue.4" size="sm" variant='transparent'>Applied</Button>
           }
@@ -75,7 +89,7 @@ const JobDesc = (props: any) => {
           }
         </div>
       </div>
-      <Divider my="xl" color='dark'/>
+      <Divider my="xl" color='dark' />
       <div className="flex justify-around sm-mx:flex-wrap sm-mx:gap-4">
         {
           card.map((item: any, index: number) => <div key={index} className="flex flex-col items-center gap-1">
@@ -87,7 +101,7 @@ const JobDesc = (props: any) => {
           </div>
           )}
       </div>
-      <Divider my="xl" color='dark'/>
+      <Divider my="xl" color='dark' />
       <div>
         <div className="text-xl font-semibold mb-5 sm-mx:text-lg xs-mx:text-base">Required Skills</div>
         <div className="flex flex-wrap gap-2">{
@@ -98,7 +112,7 @@ const JobDesc = (props: any) => {
           )}
         </div>
       </div>
-      <Divider my="xl" color='dark'/>
+      <Divider my="xl" color='dark' />
       <div className={`[&_*]:${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'} [&_h4]:text-xl [&_h4]:my-5 [&_h4]:font-semibold [&_h4]:${isDarkMode ? 'text-cape-cod-200' : 'text-gray-700'} [&_p]:text-justify [&_li]:marker:text-blue-400 [&_li]:mb-1`}
         dangerouslySetInnerHTML={{ __html: data }}>
 
