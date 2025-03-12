@@ -8,9 +8,30 @@ import { Notifications } from '@mantine/notifications';
 import { Provider } from 'react-redux';
 import Store from './Store';
 import AppRoutes from './AppRoutes';
+import { HelmetProvider } from 'react-helmet-async';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+// Google Analytics Measurement ID
+const GA_MEASUREMENT_ID = "G-JVQGFY1X51";
+
+// Function to send page view event to Google Analytics
+const trackPageView = (url: string) => {
+  (window as any).gtag?.("config", GA_MEASUREMENT_ID, { page_path: url });
+};
+
+// Component to track route changes
+const AnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location]);
+
+  return null;
+};
 
 function App() {
-  // Read theme from localStorage and ensure it's a valid MantineColorScheme
   const savedTheme = (localStorage.getItem("theme") as MantineColorScheme) || "light";
 
   const theme = createTheme({
@@ -26,10 +47,13 @@ function App() {
 
   return (
     <Provider store={Store}>
-      <MantineProvider defaultColorScheme={savedTheme} theme={theme}>
-        <Notifications position="top-center" zIndex={1000} />
-        <AppRoutes />
-      </MantineProvider>
+      <HelmetProvider>
+        <MantineProvider defaultColorScheme={savedTheme} theme={theme}>
+          <Notifications position="top-center" zIndex={1000} />
+          <AnalyticsTracker />
+          <AppRoutes />
+        </MantineProvider>
+      </HelmetProvider>
     </Provider>
   );
 }
