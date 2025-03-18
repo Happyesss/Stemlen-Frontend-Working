@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '@mantine/core';
 import { IconBrandGithub } from '@tabler/icons-react';
 import { useTheme } from '../../ThemeContext';
 
-export function TwitterButton(props: ButtonProps & React.ComponentPropsWithoutRef<'button'>) {
+export function GithubButton(props: ButtonProps & React.ComponentPropsWithoutRef<'button'>) {
   const { isDarkMode } = useTheme();
 
   return (

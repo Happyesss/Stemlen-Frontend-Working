@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { GoogleButton } from "./GoogleButton";
-import { TwitterButton } from "./GithubButton";
 import { useDisclosure } from "@mantine/hooks";
 import ResetPassword from "./ResetPassword";
 import { useDispatch } from "react-redux";
@@ -14,6 +13,7 @@ import { setJwt } from "../../Slices/JwtSlice";
 import { loginUser, oauthLogin } from "../../Services/AuthService";
 import { jwtDecode } from "jwt-decode";
 import { useTheme } from "../../ThemeContext";
+import { GithubButton } from "./GithubButton";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -57,12 +57,12 @@ const Login = () => {
       setTimeout(() => {
         navigate("/");
       }, 2000); 
-    } catch (err: any) {
-      console.error("Login error:", err.response?.data?.message || err.message);
+    } catch (error:any) {
+      console.error("Login error:", error.response.data.errorMessage);
 
       notifications.show({
         title: "Login failed:",
-        message: err.response?.data?.message || "Login failed. Please try again.",
+        message: error.response.data.errorMessage,
         icon: <IconX style={{ width: "90%", height: "90%" }} />,
         color: "red",
         withBorder: true,
@@ -88,9 +88,9 @@ const Login = () => {
           <GoogleButton radius="xl" size="sm" onClick={() => oauthLogin("google")} className={isDarkMode ? "!bg-gray-700 !text-white" : ""}>
             Google
           </GoogleButton>
-          <TwitterButton radius="xl" size="sm" onClick={() => oauthLogin("github")} className={isDarkMode ? "!bg-gray-700 !text-white" : ""}>
+          <GithubButton radius="xl" size="sm" onClick={() => oauthLogin("github")} className={isDarkMode ? "!bg-gray-700 !text-white" : ""}>
             Github
-          </TwitterButton>
+          </GithubButton>
         </Group>
 
         <Divider label="Or login with email" labelPosition="center" mb="lg" />
