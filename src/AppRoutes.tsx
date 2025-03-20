@@ -22,6 +22,8 @@ import HackathonDescription from './Component/Pages/HackathonDescription';
 import PostHackathonPage from './Component/Pages/PostHackathonPage';
 import OAuthCallback from './Services/OAuthCallback';
 import VerifyEmail from './Component/SignUp/VerifyEmail';
+import TermsService from './Component/SignUp/TermsService';
+import PrivacyPolicy from './Component/SignUp/PrivacyPolicy';
 
 const AppRoutes = () => {
     const user=useSelector((state:any)=>state.user)
@@ -29,7 +31,9 @@ const AppRoutes = () => {
     <BrowserRouter>
     <Header/>
       <Routes>
-      <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path='/terms-of-service' element={<TermsService />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/find-jobs' element={<Findjobs />} />
         <Route path='/jobs/:id' element={<JobDescription />} />
         <Route path='/apply-job/:id' element={<ApplyJob />} />

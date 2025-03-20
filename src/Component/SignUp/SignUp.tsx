@@ -35,7 +35,6 @@ const SignUp = () => {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [termsModalOpened, setTermsModalOpened] = useState(false);
   const { isDarkMode } = useTheme();
   const [termsAccepted, setTermsAccepted] = useState(false);
 
@@ -92,12 +91,8 @@ const SignUp = () => {
     if (isValid) {
       setLoading(true);
       try {
-        // Register the user
         const response = await registerUser(formData);
         console.log("Registration successful:", response);
-
-        // Store email in local storage for verification
-        localStorage.setItem("unverifiedEmail", formData.email);
 
         // Send verification email
         await sendVerificationEmail(formData.email);
@@ -187,7 +182,7 @@ const SignUp = () => {
           onChange={(event) => setTermsAccepted(event.currentTarget.checked)}
           label={
             <>
-              I accept <Anchor onClick={() => setTermsModalOpened(true)}>terms & conditions</Anchor>
+              I accept <Anchor href="/terms-of-service">terms & conditions</Anchor>
             </>
           }
         />
