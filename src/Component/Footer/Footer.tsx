@@ -22,7 +22,7 @@ const Footer = () => {
           </Link>
         </div>
         <p className="text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Stem around and connecting minds. A platform for jobs, hackathons, and talent collaboration. Grow together like a plant stem, reaching new heights.
         </p>
         <div className="flex gap-3 text-blue-400">
           <div className={`p-2 rounded-full cursor-pointer hover:bg-cape-cod-700 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
