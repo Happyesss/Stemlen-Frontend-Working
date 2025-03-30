@@ -24,6 +24,7 @@ import OAuthCallback from './Services/OAuthCallback';
 import VerifyEmail from './Component/SignUp/VerifyEmail';
 import TermsService from './Component/SignUp/TermsService';
 import PrivacyPolicy from './Component/SignUp/PrivacyPolicy';
+import AboutPage from './Component/Pages/AboutPage';
 
 const AppRoutes = () => {
     const user=useSelector((state:any)=>state.user)
@@ -32,6 +33,7 @@ const AppRoutes = () => {
     <Header/>
       <Routes>
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/about-us" element={<AboutPage/>} />
         <Route path='/terms-of-service' element={<TermsService />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/find-jobs' element={<Findjobs />} />

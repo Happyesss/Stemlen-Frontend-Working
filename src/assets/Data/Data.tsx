@@ -104,10 +104,10 @@ const footerLinks = [
     {
       title: "Company",
       links: [
-        { name: "About Us", url: "/about" },
+        { name: "About Us", url: "/about-us" },
         { name: "Contact Us", url: "/contact" },
         { name: "Privacy Policy", url: "/privacy-policy" },
-        { name: "Terms & Conditions", url: "/terms-conditions" }
+        { name: "Terms & Conditions", url: "/terms-of-service" }
       ]
     },
     {
@@ -115,7 +115,7 @@ const footerLinks = [
       links: [
         { name: "Help & Support", url: "/help-support" },
         { name: "Feedback", url: "/feedback" },
-        { name: "FAQs", url: "/faqs" }
+        { name: "FAQs", url: "/about-us" }
       ]
     }
   ];
