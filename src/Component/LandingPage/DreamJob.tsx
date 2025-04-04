@@ -1,6 +1,6 @@
 import { Avatar, Button, TextInput } from '@mantine/core';
 import landingImage from '../../assets/images/Connecting.png';
-import { IconSearch } from '@tabler/icons-react';
+import { IconFileCv, IconSearch, IconTie } from '@tabler/icons-react';
 import { useTheme } from "../../ThemeContext";
 
 const DreamJob = () => {
@@ -31,8 +31,8 @@ const DreamJob = () => {
             placeholder="Fulltime"
           />
           <Button className="flex items-center justify-center mt-7 !rounded-full sm-mx:!w-[30%]">
-            <span className="sm-mx:hidden">Search.</span> 
-            <IconSearch className="hidden sm-mx:inline" /> 
+            <span className="sm-mx:hidden">Search</span>
+            <IconSearch className="hidden sm-mx:inline" />
           </Button>
         </div>
       </div>
@@ -40,29 +40,62 @@ const DreamJob = () => {
       <div className="w-[55%] sm-mx:w-full flex items-center justify-center">
         <div className="w-[35rem] relative sm-mx:w-full">
           <img src={landingImage} alt="" className="sm-mx:w-full" />
-          <div className={`absolute -right-10 bs-mx:right-0 w-fit top-[40%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[30%] sm-mx:right-0 sm-mx:p-1 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
-            <div className={`text-center mb-1 text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs`}>10k+ got job</div>
-            <Avatar.Group>
-              <Avatar src="image.png" />
-              <Avatar src="image.png" />
-              <Avatar src="image.png" />
-              <Avatar>+10k</Avatar>
+          <div className={`absolute -right-10 bs-mx:right-0 w-fit top-[40%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[44%] sm-mx:right-0 sm-mx:p-1 sm-mx:scale-90 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
+            <div className={`text-center mb-1 text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs`}>
+              Join 25k+ People
+            </div>
+            <Avatar.Group >
+              <Avatar className="sm-mx:h-4 sm-mx:w-4"
+                src="https://img.freepik.com/free-photo/portrait-delighted-hipster-male-student-with-crisp-hair_176532-8157.jpg?semt=ais_hybrid&w=740"
+              />
+              <Avatar className="sm-mx:h-4 sm-mx:w-4"
+                src="https://static.vecteezy.com/system/resources/thumbnails/054/007/118/small/a-young-man-with-a-backpack-and-plaid-shirt-photo.jpg"
+              />
+              <Avatar className="sm-mx:h-4 sm-mx:w-4"
+                src="https://plus.unsplash.com/premium_photo-1683140621573-233422bfc7f1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c3R1ZGVudCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
+              />
+              <Avatar className="text-sm sm-mx:h-6 sm-mx:w-6 sm-mx:text-xs text-black"
+                color='text-black'
+              >
+                +10k
+              </Avatar>
             </Avatar.Group>
           </div>
-          <div className={`absolute -left-10 w-fit top-[60%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[50%] sm-mx:left-0 sm-mx:p-1 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
+
+
+          <div className={`absolute -right-10 w-fit top-[15%] sm-mx:right-0 sm-mx:p-1 bg-transparent`}>
             <div className='flex gap-3 items-center sm-mx:gap-2'>
-              <div className={`w-10 h-10 p-1 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'} rounded-lg sm-mx:w-8 sm-mx:h-8`}>
-                <img src="https://pngimg.com/d/google_PNG19635.png" alt="" />
-              </div>
-              <div className={`text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs`}>
-                <div>Software Engineer</div>
-                <div className={`text-sm ${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-700'} sm-mx:text-xs`}>India</div>
+              <div className={`w-28 h-10 p-1 bg-transparent rounded-lg sm-mx:w-16 sm-mx:h-8`}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Paper_Plane_Vector.svg/2560px-Paper_Plane_Vector.svg.png" alt="" />
               </div>
             </div>
-            <div className={`flex gap-2 justify-around ${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-700'} text-xs sm-mx:text-[10px]`}>
+          </div>
+          <div className={`absolute  w-fit top-[25%] sm-mx:left-4 sm-mx:p-1 bg-transparent`}>
+            <div className='flex gap-3 items-center sm-mx:gap-2'>
+              <div className={`w-28 h-10 p-1 bg-transparent rounded-lg sm-mx:w-16 sm-mx:h-8`}>
+                <IconTie className='text-blue-400' />
+              </div>
+            </div>
+          </div>
+
+          <div className={`absolute -left-5 w-fit top-[50%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[50%] sm-mx:left-0 sm-mx:p-1  sm-mx:scale-[0.9] ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
+            <div className='flex gap-3 items-center'>
+              <div className={`w-10 h-10 p-1 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'} rounded-lg sm-mx:w-7 sm-mx:h-7 sm-mx:p-[2px]`}>
+                <img
+                  src="https://pngimg.com/d/google_PNG19635.png"
+                  alt=""
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className={`text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs sm-mx:-ml-3`}>
+                <div>Software Engineer</div>
+              </div>
+            </div>
+            <div className={`flex gap-2 ml-8 justify-around ${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-700'} text-xs sm-mx:text-[10px]`}>
               <span>Explore big giants</span>
             </div>
           </div>
+
         </div>
       </div>
     </div>

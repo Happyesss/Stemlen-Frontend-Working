@@ -1,4 +1,4 @@
-const companies = ["Google", "Amazon", "Figma", "Netflix", "Meta", "Microsoft", "Pinterest", "Slack", "Spotify", "Oracle", "Walmart"];
+const companies = ["Google",  "Netflix", "Meta", "Pinterest","Cisco", "Spotify", "Oracle", "Walmart"];
 
 const jobCategory = [
     {
