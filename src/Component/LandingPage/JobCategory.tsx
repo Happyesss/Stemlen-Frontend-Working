@@ -1,38 +1,3 @@
-// import { Carousel } from "@mantine/carousel"
-// import { jobCategory } from "../../assets/Data/Data"
-
-// const JobCategory = () => {
-//     return (
-//         <div className="mt-20 pb-5">
-//             <div className="text-4xl text-center font-semibold mb-3 text-cape-cod-100">
-//                 Browse <span className="text-blue-400">job</span> Category
-//             </div>
-//             <p className="text-lg mb-10 mx-auto text-cape-cod-300 text-center w-1/2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe quos incidunt.</p>
-
-//             <Carousel slideSize="22%" slideGap="md" loop>
-//                 {
-//                     jobCategory.map((category) => <Carousel.Slide key={category.name}>
-//                         <div className="flex flex-col items-center w-64 gap-2 border border-blue-400 p-5 rounded-xl hover:cursor-pointer hover:shadow-[0_0_5px_2px_black] my-5 transition duration-300 ease-in-out !shadow-blue-300 ">
-//                             <div className="p-2 bg-blue-300 rounded-full">
-//                                 <img className="h-8 w-8" src={require(`../../assets/Category/${category.name}.png`)} alt="" />
-//                             </div>
-//                             <div className="text-cape-cod-100 text-xl font-semibold">{category.name}</div>
-//                             <div className="text-sm text-cape-cod-300 text-center">{category.desc}</div>
-//                             <div className="text-blue-300 text-lg">{category.jobs} jobs available</div>
-//                         </div>
-                        
-//                     </Carousel.Slide>)
-//                 }
-
-
-//             </Carousel>
-//         </div>
-
-//     )
-// }
-
-// export default JobCategory
-
 import { Carousel } from "@mantine/carousel";
 import { jobCategory } from "../../assets/Data/Data";
 

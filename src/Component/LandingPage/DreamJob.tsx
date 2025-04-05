@@ -40,27 +40,39 @@ const DreamJob = () => {
       <div className="w-[55%] sm-mx:w-full flex items-center justify-center">
         <div className="w-[35rem] relative sm-mx:w-full">
           <img src={landingImage} alt="" className="sm-mx:w-full" />
-          <div className={`absolute -right-10 bs-mx:right-0 w-fit top-[40%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[44%] sm-mx:right-0 sm-mx:p-1 sm-mx:scale-90 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
-            <div className={`text-center mb-1 text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs`}>
+          <div
+            className={`absolute -right-10 w-fit top-[40%] border-blue-400 border rounded-lg p-2
+            sm-mx:top-[44%] sm-mx:-right-4 sm-mx:p-[4px] sm-mx:scale-[0.65] sm-mx:rounded-md
+            md:-right-6 md:top-[42%] md:p-[6px] md:scale-[0.85]
+            ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
+
+            <div
+              className={`text-center mb-[2px] text-sm sm-mx:text-[9px] sm-mx:mb-[1px] md:text-xs ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'}`}>
               Join 25k+ People
             </div>
-            <Avatar.Group >
-              <Avatar className="sm-mx:h-4 sm-mx:w-4"
+
+            <Avatar.Group className="gap-[2px] sm-mx:gap-[1px] md:gap-[3px]">
+              <Avatar
+                className="sm-mx:h-[14px] sm-mx:w-[14px] md:h-[20px] md:w-[20px] h-6 w-6"
                 src="https://img.freepik.com/free-photo/portrait-delighted-hipster-male-student-with-crisp-hair_176532-8157.jpg?semt=ais_hybrid&w=740"
               />
-              <Avatar className="sm-mx:h-4 sm-mx:w-4"
+              <Avatar
+                className="sm-mx:h-[14px] sm-mx:w-[14px] md:h-[20px] md:w-[20px] h-6 w-6"
                 src="https://static.vecteezy.com/system/resources/thumbnails/054/007/118/small/a-young-man-with-a-backpack-and-plaid-shirt-photo.jpg"
               />
-              <Avatar className="sm-mx:h-4 sm-mx:w-4"
-                src="https://plus.unsplash.com/premium_photo-1683140621573-233422bfc7f1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c3R1ZGVudCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
+              <Avatar
+                className="sm-mx:h-[14px] sm-mx:w-[14px] md:h-[20px] md:w-[20px] h-6 w-6"
+                src="https://plus.unsplash.com/premium_photo-1683140621573-233422bfc7f1?fm=jpg&q=60&w=3000"
               />
-              <Avatar className="text-sm sm-mx:h-6 sm-mx:w-6 sm-mx:text-xs text-black"
-                color='text-black'
+              <Avatar
+                className="text-sm text-black sm-mx:h-[16px] sm-mx:w-[16px] sm-mx:text-[9px] md:h-[20px] md:w-[20px] md:text-xs"
+                color="text-black"
               >
                 +10k
               </Avatar>
             </Avatar.Group>
           </div>
+
 
 
           <div className={`absolute -right-10 w-fit top-[15%] sm-mx:right-0 sm-mx:p-1 bg-transparent`}>
@@ -78,23 +90,32 @@ const DreamJob = () => {
             </div>
           </div>
 
-          <div className={`absolute -left-5 w-fit top-[50%] border-blue-400 border rounded-lg p-2 backdrop-blur-md sm-mx:top-[50%] sm-mx:left-0 sm-mx:p-1  sm-mx:scale-[0.9] ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
-            <div className='flex gap-3 items-center'>
-              <div className={`w-10 h-10 p-1 ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'} rounded-lg sm-mx:w-7 sm-mx:h-7 sm-mx:p-[2px]`}>
+          <div
+            className={`absolute -left-5 w-fit top-[50%] border-blue-400 border rounded-lg p-2 sm-mx:left-0 
+            sm-mx:p-1 sm-mx:scale-[0.75] md:-left-3 md:p-[6px] md:scale-[0.9] ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'}`}>
+            <div className='flex gap-3 items-center sm-mx:gap-2 md:gap-2.5'>
+              <div
+                className={`w-10 h-10 p-1 rounded-lg ${isDarkMode ? 'bg-cape-cod-900' : 'bg-white'} sm-mx:w-6 sm-mx:h-6 sm-mx:p-[2px] 
+                md:w-8 md:h-8 md:p-[3px]`}>
                 <img
                   src="https://pngimg.com/d/google_PNG19635.png"
                   alt=""
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className={`text-sm ${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'} sm-mx:text-xs sm-mx:-ml-3`}>
+              <div
+                className={`text-sm sm-mx:text-[10px] sm-mx:-ml-2 md:text-xs md:-ml-1${isDarkMode ? 'text-cape-cod-100' : 'text-cape-cod-900'}`}>
                 <div>Software Engineer</div>
               </div>
             </div>
-            <div className={`flex gap-2 ml-8 justify-around ${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-700'} text-xs sm-mx:text-[10px]`}>
+
+            <div
+              className={`flex gap-2 ml-8 justify-around text-xs sm-mx:ml-4 sm-mx:gap-1 sm-mx:text-[9px] md:ml-6 md:gap-1.5 md:text-[11px]
+              ${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-700'}`}>
               <span>Explore big giants</span>
             </div>
           </div>
+
 
         </div>
       </div>

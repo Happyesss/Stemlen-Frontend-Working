@@ -1,3 +1,4 @@
+import { IconBriefcase, IconBriefcaseFilled, IconBrowserCheck, IconBrowserShare, IconChecklist } from '@tabler/icons-react';
 import landingImage from '../../assets/images/Connecting.png';
 import { useTheme } from "../../ThemeContext";
 
@@ -20,7 +21,7 @@ const Working = () => {
       <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-7xl px-8">
         {/* Image Section */}
         <div className="md:w-1/2 flex justify-center mb-10 md:mb-0">
-          <img className="w-[30rem]" src={landingImage} alt="Landing" />
+          <img className="w-[30rem]" src="https://mindfulbots.com/assets/about-rpa/Public-Sector.png" alt="Landing" />
         </div>
 
         {/* Steps Section */}
@@ -28,7 +29,7 @@ const Working = () => {
           {/* Step 1 */}
           <div className="flex items-center gap-6">
             <div className=" flex-shrink-0">
-              <img className="h-20 w-20" src="https://static.vecteezy.com/system/resources/previews/032/851/483/non_2x/cv-approved-3d-illustration-icon-or-resume-approved-3d-illustration-icon-free-png.png" alt="Step 1" />
+              <IconChecklist size='64'/>  
             </div>
             <div>
               <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-cape-cod-800'}`}>1. Build Your Resume</h2>
@@ -41,7 +42,7 @@ const Working = () => {
           {/* Step 2 */}
           <div className="flex items-center gap-6">
             <div className=" flex-shrink-0">
-              <img className="h-20 w-20" src="https://cdn3d.iconscout.com/3d/premium/thumb/web-searching-3d-icon-download-in-png-blend-fbx-gltf-file-formats--search-browsing-ui-kit-elements-pack-user-interface-icons-5285037.png" alt="Step 2" />
+              <IconBrowserShare size='64' className='text-blue-400'/>
             </div>
             <div>
               <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-cape-cod-800'}`}>2. Search for Jobs</h2>
@@ -54,8 +55,8 @@ const Working = () => {
           {/* Step 3 */}
           <div className="flex items-center gap-6">
             <div className=" flex-shrink-0">
-              <img className="h-20 w-20" src="https://cdn3d.iconscout.com/3d/premium/thumb/apply-button-3d-icon-download-in-png-blend-fbx-gltf-file-formats--add-to-cart-call-action-click-cta-gesture-pack-user-interface-icons-11171750.png" alt="Step 3" />
-            </div>
+            <IconBrowserCheck size='64' className='text-green-400'/>
+              </div>
             <div>
               <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-cape-cod-800'}`}>3. Apply Online</h2>
               <p className={`${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-600'}`}>
@@ -67,8 +68,8 @@ const Working = () => {
           {/* Step 4 */}
           <div className="flex items-center gap-6">
             <div className=" flex-shrink-0">
-              <img className="h-20 w-20" src="https://static.vecteezy.com/system/resources/thumbnails/038/567/487/small_2x/business-bag-isolated-on-transparent-3d-render-png.png" alt="Step 4" />
-            </div>
+            <IconBriefcaseFilled size='64' className='text-yellow-400'/>
+              </div>
             <div>
               <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-cape-cod-800'}`}>4. Get Hired</h2>
               <p className={`${isDarkMode ? 'text-cape-cod-200' : 'text-cape-cod-600'}`}>
