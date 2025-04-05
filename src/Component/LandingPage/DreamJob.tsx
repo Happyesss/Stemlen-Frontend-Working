@@ -1,6 +1,6 @@
 import { Avatar, Button, TextInput } from '@mantine/core';
 import landingImage from '../../assets/images/Connecting.png';
-import { IconFileCv, IconSearch, IconTie } from '@tabler/icons-react';
+import { IconSearch, IconTie } from '@tabler/icons-react';
 import { useTheme } from "../../ThemeContext";
 
 const DreamJob = () => {

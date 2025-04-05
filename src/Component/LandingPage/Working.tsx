@@ -1,5 +1,4 @@
-import { IconBriefcase, IconBriefcaseFilled, IconBrowserCheck, IconBrowserShare, IconChecklist } from '@tabler/icons-react';
-import landingImage from '../../assets/images/Connecting.png';
+import { IconBriefcaseFilled, IconBrowserCheck, IconBrowserShare, IconChecklist } from '@tabler/icons-react';
 import { useTheme } from "../../ThemeContext";
 
 const Working = () => {

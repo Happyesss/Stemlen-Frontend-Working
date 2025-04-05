@@ -11,7 +11,7 @@ import { setUser } from "../../Slices/UserSlices";
 import { setupResponseInterceptors } from "../../Interceptor/AxiosInterceptor";
 import { useDisclosure } from "@mantine/hooks";
 import { IconMoonStars, IconSun, IconX } from "@tabler/icons-react";
-import Logo from "../../assets/images/logo.png"; 
+import Logo from "../../assets/images/logo.png";
 import { useTheme } from "../../ThemeContext";
 
 interface CustomJwtPayload extends JwtPayload {
@@ -30,10 +30,9 @@ const Header = () => {
 
   const links = useMemo(() => [
     { name: "Find jobs", url: "find-jobs" },
-    { name: "Hackathon", url: "find-hackathon" },
+    { name: "Hackathon & Events", url: "find-hackathon" },
     { name: "Post jobs", url: "post-job/0" },
-    { name: "About us", url: "about" },
-    { name: "Gallery", url: "job-gallery" },
+    { name: "About us", url: "about-us" },
   ], []);
 
   useEffect(() => {
@@ -83,20 +82,20 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      
+
       {NavLinks()}
 
       <div className="flex gap-3 items-center">
-      {!user && (
-    <Switch
-      checked={isDarkMode}
-      onChange={toggleTheme}
-      size="md"
-      color="dark.4"
-      onLabel={<IconSun size={16} stroke={2.5} color="var(--mantine-color-yellow-4)" />}
-      offLabel={<IconMoonStars size={16} stroke={2.5} color="var(--mantine-color-blue-6)" />}
-    />
-  )}
+        {!user && (
+          <Switch
+            checked={isDarkMode}
+            onChange={toggleTheme}
+            size="md"
+            color="dark.4"
+            onLabel={<IconSun size={16} stroke={2.5} color="var(--mantine-color-yellow-4)" />}
+            offLabel={<IconMoonStars size={16} stroke={2.5} color="var(--mantine-color-blue-6)" />}
+          />
+        )}
 
         {user ? (
           <ProfileMenu />
@@ -110,31 +109,32 @@ const Header = () => {
             </Link>
           </>
         )}
-        
+
         <Burger className="bs:hidden" opened={opened} onClick={open} aria-label="Toggle navigation" color={isDarkMode ? "white" : "black"} />
 
-        <Drawer 
+        <Drawer
           size="xs"
-          overlayProps={{ backgroundOpacity: 0.5, blur: 4 }} 
-          opened={opened} 
-          onClose={close} 
+          overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+          opened={opened}
+          onClose={close}
           position="right"
           closeButtonProps={{ icon: <IconX size={30} /> }}
         >
-          <div className="flex flex-col gap-5 p-5 ">
+          <div className="flex flex-col gap-5 p-5">
             {links.map((link, index) => (
               <Link
                 key={index}
                 to={`/${link.url}`}
-                className={`transition-colors duration-300 flex text-lg ${
-                  location.pathname === `/${link.url}` ? "text-blue-400" : "hover:text-blue-500"
-                }`}
+                onClick={close} 
+                className={`transition-colors duration-300 flex text-lg ${location.pathname === `/${link.url}` ? "text-blue-400" : "hover:text-blue-500"
+                  }`}
               >
                 {link.name}
               </Link>
             ))}
           </div>
         </Drawer>
+
       </div>
     </div>
   );

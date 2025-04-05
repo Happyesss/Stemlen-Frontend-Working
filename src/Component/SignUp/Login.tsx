@@ -79,16 +79,16 @@ const Login = () => {
         <div className="flex items-center justify-center min-h-screen w-[30%] md-mx:w-[90%] ">
         <div
           className={`w-full max-w-md p-8 rounded-lg shadow-lg transition-all ${
-            isDarkMode ? "bg-gray-900 text-gray-200" : "bg-white text-gray-900"
+            isDarkMode ? "bg-cape-cod-900 text-cape-cod-100" : "bg-white text-gray-900"
           }`}
         >
         <div className="text-center text-2xl font-semibold mb-6">Login</div>
 
         <Group grow mb="xl">
-          <GoogleButton radius="xl" size="sm" onClick={() => oauthLogin("google")} className={isDarkMode ? "!bg-gray-700 !text-white" : ""}>
+          <GoogleButton radius="xl" size="sm" onClick={() => oauthLogin("google")} className={isDarkMode ? "!bg-cape-cod-700 !text-white" : ""}>
             Google
           </GoogleButton>
-          <GithubButton radius="xl" size="sm" onClick={() => oauthLogin("github")} className={isDarkMode ? "!bg-gray-700 !text-white" : ""}>
+          <GithubButton radius="xl" size="sm" onClick={() => oauthLogin("github")} className={isDarkMode ? "!bg-cape-cod-700 !text-white" : ""}>
             Github
           </GithubButton>
         </Group>
@@ -98,6 +98,7 @@ const Login = () => {
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <div className="flex flex-col gap-4">
             <TextInput
+             className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
               name="email"
               withAsterisk
               error={form.errors.email}
@@ -106,6 +107,7 @@ const Login = () => {
               placeholder="Your email"
               {...form.getInputProps("email")} />
             <PasswordInput
+              className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
               name="password"
               withAsterisk
               error={form.errors.password}

@@ -124,10 +124,11 @@ const SignUp = () => {
   return (
     <>
       <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-      <div className="w-1/2 px-24 flex flex-col justify-center gap-1 mx-auto sm-mx:w-full sm-mx:px-4">
+      <div className="w-1/2 px-24 flex flex-col justify-center gap-1 mx-auto sm-mx:w-full sm-mx:px-4 mt-8">
         <div className="text-2xl font-semibold sm-mx:text-xl">Create Account</div>
 
         <TextInput
+          className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
           name="name"
           error={formErrors.name}
           value={formData.name}
@@ -138,6 +139,7 @@ const SignUp = () => {
         />
 
         <TextInput
+           className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
           name="email"
           error={formErrors.email}
           value={formData.email}
@@ -149,6 +151,7 @@ const SignUp = () => {
         />
 
         <PasswordInput
+           className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
           name="password"
           error={formErrors.password}
           value={formData.password}
@@ -160,6 +163,7 @@ const SignUp = () => {
         />
 
         <PasswordInput
+           className={isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}
           name="confirmPassword"
           error={formErrors.confirmPassword}
           value={formData.confirmPassword}
@@ -190,6 +194,17 @@ const SignUp = () => {
         <Button loading={loading} onClick={handleSubmit} variant="filled">
           Sign up
         </Button>
+
+        <Divider label="Or continue with" labelPosition="center" my="lg" className="!border-cape-cod-200" />
+
+        <Group grow mb="xl">
+          <GoogleButton radius="xl" size="sm" onClick={() => oauthLogin("google")} className={isDarkMode ? "!bg-cape-cod-800 !text-white" : ""}>
+            Google
+          </GoogleButton>
+          <GithubButton radius="xl" size="sm" onClick={() => oauthLogin("github")} className={isDarkMode ? "!bg-cape-cod-800 !text-white" : ""}>
+            Github
+          </GithubButton>
+        </Group>
 
         <div className="mx-auto">
           Have an account? <Link to="/login" className="text-blue-400 hover:underline">Login</Link>

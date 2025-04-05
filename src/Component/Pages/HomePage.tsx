@@ -5,7 +5,6 @@ import Information from '../LandingPage/Information';
 import QuickSection from '../LandingPage/QuickSection';
 import { useTheme } from '../../ThemeContext';
 import { Divider } from '@mantine/core';
-import TestimonialSection from '../LandingPage/Testimonial';
 import Testimonials from '../LandingPage/Testimonial';
 
 const HomePage = () => {
