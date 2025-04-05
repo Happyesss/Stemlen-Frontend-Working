@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { Checkbox, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
 import { IconSelector } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
 import { UpdateFilter } from '../../Slices/FilterSlice';
@@ -44,73 +44,101 @@ const MultiInput = (props: any) => {
     setValue((current) => current.filter((v) => v !== val));
   };
 
-  const values = value
-    .slice(0, 1)
-    .map((item) => (
-      <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
-        {item}
-      </Pill>
-    ));
-
-  const options = data.filter((item) => item.toLowerCase().includes(search.trim().toLowerCase())).map((item) => (
-    <Combobox.Option value={item} key={item} active={value.includes(item)} >
-      <Group gap="sm" >
-        <Checkbox size='xs'
-          checked={value.includes(item)}
-          onChange={() => { }}
-          aria-hidden
-          tabIndex={-1}
-          style={{ pointerEvents: 'none' }}
-        />
-        <span className={isDarkMode ? ' text-cape-cod-300' : 'text-cape-cod-700'}>{item}</span>
-      </Group>
-    </Combobox.Option>
+  const values = value.map((item) => (
+    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
+      {item}
+    </Pill>
   ));
 
-  return (
-    <Combobox store={combobox} onOptionSubmit={handleValueSelect} withinPortal={false}>
-      <Combobox.DropdownTarget>
-        <PillsInput variant='unstyled' rightSection={<IconSelector />} onClick={() => combobox.toggleDropdown()}
-          leftSection={
-            <div className={`p-1 rounded-full mr-2 ${isDarkMode ? 'text-blue-400 bg-cape-cod-900' : 'text-blue-600 bg-gray-200'}`}><props.icon /></div>
-          }>
-          <Pill.Group>
-            {value.length > 0 ? (
-              <>
-                {values}
-                {value.length > 1 && (
-                  <Pill>+{value.length - 1} more</Pill>
-                )}
-              </>
-            ) : (
-              <Input.Placeholder className={isDarkMode ? ' text-cape-cod-200' : 'text-gray-500'}>{props.title}</Input.Placeholder>
+  const options = data
+    .filter((item) => item.toLowerCase().includes(search.trim().toLowerCase()))
+    .map((item) => (
+      <Combobox.Option value={item} key={item} active={value.includes(item)}>
+        <Group gap="sm">
+          <Checkbox
+            size="xs"
+            checked={value.includes(item)}
+            onChange={() => {}}
+            aria-hidden
+            tabIndex={-1}
+            style={{ pointerEvents: 'none' }}
+          />
+          <span className={isDarkMode ? 'text-cape-cod-300' : 'text-cape-cod-700'}>
+            {item}
+          </span>
+        </Group>
+      </Combobox.Option>
+    ));
+
+    return (
+      <Combobox store={combobox} onOptionSubmit={handleValueSelect} withinPortal={false}>
+        <Combobox.DropdownTarget>
+          <PillsInput
+            variant="unstyled"
+            onClick={() => combobox.openDropdown()}
+            leftSection={
+              <div
+                className={`p-1 rounded-full mr-2 ${
+                  isDarkMode ? 'text-blue-400 bg-cape-cod-900' : 'text-blue-600 bg-gray-200'
+                }`}
+              >
+                <props.icon />
+              </div>
+            }
+            className={isDarkMode ? 'bg-cape-cod-900' : 'bg-white'} // Added background control
+          >
+            <Pill.Group>
+              {values}
+              <Combobox.EventsTarget>
+                <PillsInput.Field
+                  className={`${
+                    isDarkMode 
+                      ? '!text-white placeholder-cape-cod-400'  // Force white text in dark mode
+                      : 'text-black placeholder-gray-500'
+                  } ml-2 flex-1 bg-transparent`} // Added bg-transparent
+                  placeholder={props.title}
+                  value={search}
+                  onChange={(event) => {
+                    setSearch(event.currentTarget.value);
+                    combobox.openDropdown();
+                    combobox.updateSelectedOptionIndex();
+                  }}
+                  onFocus={() => combobox.openDropdown()}
+                  onBlur={() => combobox.closeDropdown()}
+                />
+              </Combobox.EventsTarget>
+            </Pill.Group>
+          </PillsInput>
+        </Combobox.DropdownTarget>
+  
+        <Combobox.Dropdown
+          className={
+            isDarkMode
+              ? '!bg-cape-cod-900 !text-cape-cod-100 !border-cape-cod-700' // Improved text contrast
+              : 'bg-white text-black border-gray-300'
+          }
+        >
+          <Combobox.Options>
+            {options}
+  
+            {!exactOptionMatch && search.trim().length > 0 && (
+              <Combobox.Option 
+                value="$create"
+                className={isDarkMode ? 'hover:!bg-cape-cod-800' : ''}
+              >
+                + Create {search}
+              </Combobox.Option>
             )}
-          </Pill.Group>
-        </PillsInput>
-      </Combobox.DropdownTarget>
+  
+            {exactOptionMatch && search.trim().length > 0 && options.length === 0 && (
+              <Combobox.Empty className={isDarkMode ? '!text-cape-cod-300' : ''}>
+                Nothing found
+              </Combobox.Empty>
+            )}
+          </Combobox.Options>
+        </Combobox.Dropdown>
+      </Combobox>
+    );
+  };
 
-      <Combobox.Dropdown
-        className={isDarkMode ? "!bg-cape-cod-900 text-white !border-cape-cod-700" : "bg-white text-black border-gray-300"}
-      >
-
-        <Combobox.Search
-          value={search}
-          onChange={(event) => setSearch(event.currentTarget.value)}
-          placeholder="Type here..."
-        />
-        <Combobox.Options>
-          {options}
-
-          {!exactOptionMatch && search.trim().length > 0 && (
-            <Combobox.Option value="$create">+ Create {search}</Combobox.Option>
-          )}
-
-          {exactOptionMatch && search.trim().length > 0 && options.length === 0 && (
-            <Combobox.Empty>Nothing found</Combobox.Empty>
-          )}
-        </Combobox.Options>
-      </Combobox.Dropdown>
-    </Combobox>
-  );
-}
-export default MultiInput
+export default MultiInput;
