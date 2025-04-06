@@ -51,7 +51,7 @@ const Info = () => {
   };
 
   return (
-    <div className="px-3 mt-24">
+    <div className="px-3 mt-24 sm-mx:mt-16">
       <div className="text-3xl flex font-semibold justify-between">
         {edit ? (
           <TextInput

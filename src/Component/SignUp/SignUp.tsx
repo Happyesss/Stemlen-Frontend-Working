@@ -92,8 +92,6 @@ const SignUp = () => {
       setLoading(true);
       try {
         const response = await registerUser(formData);
-        console.log("Registration successful:", response);
-
         // Send verification email
         await sendVerificationEmail(formData.email);
 

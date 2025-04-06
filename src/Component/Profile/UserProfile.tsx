@@ -66,7 +66,7 @@ const UserProfile = (props: any) => {
           <Indicator color="transparent"
           >
             <Avatar
-              className="!w-48 !h-48 lg-mx:!h-40 lg-mx:!w-40 sm-mx:!w-32 sm-mx:!h-32  rounded-full -bottom-1/3 absolute left-3 border-cape-cod-950 border-8 cursor-pointer"
+              className="!w-48 !h-48 lg-mx:!h-40 lg-mx:!w-40 sm-mx:!w-28 sm-mx:!h-28  rounded-full -bottom-1/3 absolute left-1.5 border-cape-cod-950 border-4 cursor-pointer"
               src={profile.picture ? `data:image/jpeg;base64,${profile.picture}` : require(`../../assets/images/avatar.png`)}
               alt="Profile"
               onClick={() => document.getElementById('profile-pic-input')?.click()}

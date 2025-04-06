@@ -76,7 +76,7 @@ const Header = () => {
     `}>
       <div className="flex gap-3 items-center text-blue-400">
         <Link to="/" className="flex items-center gap-2">
-          <img src={Logo} alt="Stemlen Logo" className="h-10 w-11" />
+          <img src={Logo} alt="Stemlen Logo" className="h-[2.70rem] w-11" />
           <div className="text-3xl font-semibold xs-mx:hidden">
             <span className={isDarkMode ? "text-cape-cod-100" : "text-cape-cod-900"}>Stem</span>len
           </div>

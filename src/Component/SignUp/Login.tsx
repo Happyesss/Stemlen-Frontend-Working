@@ -38,7 +38,6 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await loginUser(values);
-      console.log("Login successful:", response);
 
       notifications.show({
         title: "Login successful:",
@@ -51,15 +50,12 @@ const Login = () => {
 
       dispatch(setJwt(response.jwt));
       const decoded=jwtDecode(response.jwt);
-      console.log(decoded);
       dispatch(setUser({...decoded,email:decoded.sub}));
 
       setTimeout(() => {
         navigate("/");
       }, 2000); 
     } catch (error:any) {
-      console.error("Login error:", error.response.data.errorMessage);
-
       notifications.show({
         title: "Login failed:",
         message: error.response.data.errorMessage,
