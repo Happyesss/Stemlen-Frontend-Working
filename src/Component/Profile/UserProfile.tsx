@@ -17,6 +17,10 @@ const UserProfile = (props: any) => {
   const user = useSelector((state: any) => state.user);
 
   const handleProfilePicChange = async (image: any) => {
+    if (image.size > 1 * 1024 * 1024) { 
+      successNotification('Profile Picture must be less than 1MB', 'Error');
+      return;
+    }
     let picture: any = await getBase64(image);
     let updatedProfile = { ...profile, picture: picture.split(',')[1] };
     dispatch(changeProfile(updatedProfile));
@@ -24,6 +28,10 @@ const UserProfile = (props: any) => {
   };
 
   const handleprofileBackgroundChange = async (image: any) => {
+    if (image.size > 1 * 1024 * 1024) {
+      successNotification('Profile Background must be less than 1MB', 'Error');
+      return;
+    }
     let profileBackground: any = await getBase64(image);
     let updatedProfile = { ...profile, profileBackground: profileBackground.split(',')[1] };
     dispatch(changeProfile(updatedProfile));

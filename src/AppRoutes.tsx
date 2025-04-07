@@ -38,7 +38,7 @@ const AppRoutes = () => {
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/find-jobs' element={<Findjobs />} />
         <Route path='/jobs/:id' element={<JobDescription />} />
-        <Route path='/apply-job/:id' element={<ApplyJob />} />
+        <Route path='/apply-job/:id' element={user ? <ApplyJob /> : <Navigate to="/login" replace />} />
         <Route path='/find-hackathon' element={<HackathonPage />} />
         <Route path='/hackathon/:id' element={<HackathonDescription />} />
         <Route path='/posted-job/:id' element={<ProtectedRoute allowedRoles={['COMPANY']}><PostedJob/></ProtectedRoute>} />
@@ -47,7 +47,7 @@ const AppRoutes = () => {
         <Route path='/company/:name' element={<CompanyPage />} />
         <Route path='/talent-profile/:id' element={<TalentProfile />} />
         <Route path='/post-job/:id' element={<ProtectedRoute allowedRoles={['COMPANY']}><PostPage/></ProtectedRoute>} />
-        <Route path='/post-hackathon' element={<PostHackathonPage/>} />
+        <Route path='/post-hackathon' element={<ProtectedRoute allowedRoles={['COMPANY']}><PostHackathonPage/></ProtectedRoute>} />
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path="/signup" element={<PublicRoute restricted={true}><SignUpPage /></PublicRoute>} />
         <Route path='/login' element={<PublicRoute restricted={true}><SignUpPage /></PublicRoute>} />

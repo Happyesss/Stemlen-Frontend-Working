@@ -27,8 +27,8 @@ const PostHackathon = () => {
       prize: '',
       about: '',
       description: desc,
-      bannerImage: null,
-      iconImage: null,
+      bannerImage: null as File | null,
+      iconImage: null as File | null,
       eligibilityCriteria: [],
       applyUrl: '',
     },
@@ -63,18 +63,31 @@ const PostHackathon = () => {
   const handlePost = async () => {
     form.validate();
     if (!form.isValid()) return;
-
+  
+    const bannerFile = form.values.bannerImage;
+    const iconFile = form.values.iconImage;
+  
+    // Check file size limits
+    if (bannerFile && bannerFile.size > 1024 * 1024) { // 1MB
+      errorNotification('Banner image must be less than or equal to 1MB.', 'error');
+      return;
+    }
+    if (iconFile && iconFile.size > 500 * 1024) { // 500KB
+      errorNotification('Icon image must be less than or equal to 500KB.', 'error');
+      return;
+    }
+  
     try {
-      const bannerBase64 = form.values.bannerImage ? await toBase64(form.values.bannerImage) : null;
-      const iconBase64 = form.values.iconImage ? await toBase64(form.values.iconImage) : null;
-
+      const bannerBase64 = bannerFile ? await toBase64(bannerFile) : null;
+      const iconBase64 = iconFile ? await toBase64(iconFile) : null;
+  
       const formData = {
         ...form.getValues(),
-        eventDate: form.values.eventDate ? (form.values.eventDate as Date).toISOString().split('T')[0] : null, // Convert to YYYY-MM-DD
+        eventDate: form.values.eventDate ? (form.values.eventDate as Date).toISOString().split('T')[0] : null,
         bannerImage: bannerBase64,
         iconImage: iconBase64,
       };
-
+  
       await postHackathon(formData);
       successNotification('Hackathon Posted Successfully', 'success');
       navigate('/find-hackathon');
@@ -87,7 +100,7 @@ const PostHackathon = () => {
       }
     }
   };
-
+  
   return (
     <div className="w-4/5 mx-auto md-mx:w-[96%]">
       <div className="text-2xl font-semibold mt-4 mb-5">Post Hackathon</div>
