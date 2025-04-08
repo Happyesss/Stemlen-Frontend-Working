@@ -1,4 +1,4 @@
-import { Button, NumberInput, TagsInput, Textarea, TextInput } from "@mantine/core";
+import { Button, NumberInput, TagsInput, Textarea, TextInput, FileInput } from "@mantine/core";
 import SelectInput from "./SelectInput";
 import TextEditor from "./TextEditor";
 import { content, fields } from "../../assets/Data/PostJob";
@@ -48,7 +48,8 @@ const PostJobs = () => {
       skillsRequired: [],
       about: "",
       description: content,
-      applyUrl: "", 
+      applyUrl: "",
+      iconImage: null, // Added iconImage field
     },
     validate: {
       jobTitle: isNotEmpty("Job Title is required"),
@@ -63,35 +64,77 @@ const PostJobs = () => {
       applyUrl: (value: string | null) => {
         if (!value || value.trim() === "") return null; 
         return matches(/^https?:\/\/[^\s$.?#].[^\s]*$/i, "Invalid URL")(value);
-      }
-      
+      },
+      iconImage: (value: File | null) => {
+        if (value && value.size > 500 * 1024) { // 500KB limit
+          return "Icon Image must be less than 500KB";
+        }
+        return null;
+      },
     },
   });
 
-  const handlePost = () => {
+  const toBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (typeof reader.result === "string") {
+          resolve(reader.result.split(",")[1]); // Extract Base64 string
+        } else {
+          reject(new Error("Failed to convert file to Base64"));
+        }
+      };
+      reader.onerror = (error) => reject(error);
+    });
+
+  const handlePost = async () => {
     form.validate();
     if (!form.isValid()) return;
-    postJob({ ...form.getValues(), id, postedBy: user.id, jobStatus: "ACTIVE" })
-      .then((res) => {
-        successNotification("Job Posted Successfully", "success");
-        navigate(`/posted-job/${res.id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-        errorNotification(error.response.data.errorMessage, "error");
-      });
+
+    try {
+      const iconBase64 = form.values.iconImage
+        ? await toBase64(form.values.iconImage)
+        : null;
+
+      const jobData = {
+        ...form.getValues(),
+        id,
+        postedBy: user.id,
+        jobStatus: "ACTIVE",
+        iconImage: iconBase64, // Include iconImage in the payload
+      };
+
+      await postJob(jobData);
+      successNotification("Job Posted Successfully", "success");
+      navigate(`/posted-job/${id}`);
+    } catch (error:any) {
+      console.log(error);
+      errorNotification(error.response?.data?.errorMessage || "Error occurred", "error");
+    }
   };
 
-  const handleDraft = () => {
-    postJob({ ...form.getValues(), id, postedBy: user.id, jobStatus: "DRAFT" })
-      .then((res) => {
-        successNotification("Job Drafted Successfully", "success");
-        navigate(`/posted-job/${res.id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-        errorNotification(error.response.data.errorMessage, "error");
-      });
+  const handleDraft = async () => {
+    try {
+      const iconBase64 = form.values.iconImage
+        ? await toBase64(form.values.iconImage)
+        : null;
+
+      const jobData = {
+        ...form.getValues(),
+        id,
+        postedBy: user.id,
+        jobStatus: "DRAFT",
+        iconImage: iconBase64, // Include iconImage in the payload
+      };
+
+      await postJob(jobData);
+      successNotification("Job Drafted Successfully", "success");
+      navigate(`/posted-job/${id}`);
+    } catch (error:any) {
+      console.log(error);
+      errorNotification(error.response?.data?.errorMessage || "Error occurred", "error");
+    }
   };
 
   return (
@@ -110,6 +153,7 @@ const PostJobs = () => {
           <SelectInput form={form} name="location" {...select[4]} />
           <NumberInput {...form.getInputProps("packageOffered")} withAsterisk label="packageOffered" min={1} max={500} clampBehavior="strict" placeholder="Enter Salary" hideControls styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000' } }} />
         </div>
+        <FileInput {...form.getInputProps("iconImage")} withAsterisk label="Icon Image" placeholder="Upload Icon Image" accept="image/png,image/jpeg" styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000', borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
         <TagsInput {...form.getInputProps("skillsRequired")} withAsterisk label="Skills" placeholder="Enter the skills" splitChars={[",", " ", "|"]} clearable acceptValueOnBlur styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000',borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
         <Textarea {...form.getInputProps("about")} withAsterisk label="About" placeholder="Enter the about" minRows={3} maxRows={6} styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000',borderColor: isDarkMode ? "transparent" : "#d1d5db"  } }} />
         <TextInput {...form.getInputProps("applyUrl")} label="Apply URL" placeholder="Enter the apply URL" styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000', borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />

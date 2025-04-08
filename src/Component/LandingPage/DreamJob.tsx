@@ -2,10 +2,23 @@ import { Avatar, Button, TextInput } from '@mantine/core';
 import landingImage from '../../assets/images/Connecting.png';
 import { IconSearch, IconTie } from '@tabler/icons-react';
 import { useTheme } from "../../ThemeContext";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DreamJob = () => {
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
 
+  const [jobTitle, setJobTitle] = useState('');
+  const [jobType, setJobType] = useState('');
+
+  const handleSearch = () => {
+    const query = new URLSearchParams();
+    if (jobTitle) query.append('title', jobTitle);
+    if (jobType) query.append('type', jobType);
+
+    navigate(`/find-jobs?${query.toString()}`);
+  };
   return (
     <div className={'flex items-center px-20 bs-mx:px-10 md-mx:px-5 sm-mx:px-2 sm-mx:flex-col-reverse '}>
       <div className="flex flex-col w-[45%] sm-mx:w-[92%] gap-3">
@@ -17,6 +30,8 @@ const DreamJob = () => {
         </div>
         <div className='flex gap-3 mt-4'>
           <TextInput
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.currentTarget.value)}
             className={`rounded-lg p-1 px-2 ${isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'} sm-mx:!w-full`}
             size="sm"
             radius="xl"
@@ -24,13 +39,15 @@ const DreamJob = () => {
             placeholder="Software Engineer"
           />
           <TextInput
+            value={jobType}
+            onChange={(e) => setJobType(e.currentTarget.value)}
             className={`rounded-lg p-1 px-2 ${isDarkMode ? 'text-cape-cod-100 [&_input]:bg-cape-cod-800 [&_input]:!text-cape-cod-100 [&_input]:border-transparent ' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'} sm-mx:!w-full`}
             size="sm"
             radius="xl"
             label="Job Type"
             placeholder="Fulltime"
           />
-          <Button className="flex items-center justify-center mt-7 !rounded-full sm-mx:!w-[30%]">
+          <Button onClick={handleSearch} className="flex items-center justify-center mt-7 !rounded-full sm-mx:!w-[30%]">
             <span className="sm-mx:hidden">Search</span>
             <IconSearch className="hidden sm-mx:inline" />
           </Button>

@@ -54,7 +54,19 @@ const JobDesc = (props: any) => {
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className={`p-3 rounded-xl sm-mx:p-1 ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-            {props.company && <img className="h-7 " src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
+          {props.iconImage ? (
+    <img
+      className="h-7 w-7 object-contain"
+      src={`data:image/png;base64,${props.iconImage}`}
+      alt={`${props.company} logo`}
+    />
+  ) : (
+    <img
+      className="h-7 w-7 object-contain"
+      src={require("../../assets/images/logo.png")}
+      alt="Default logo"
+    />
+  )}
           </div>
           <div>
             <div className="font-semibold text-2xl sm-mx:text-xl">{props.jobTitle}</div>
@@ -117,28 +129,6 @@ const JobDesc = (props: any) => {
         dangerouslySetInnerHTML={{ __html: data }}>
 
       </div>
-      {/*
-      <Divider my="xl" color='dark'/>
-       <div>
-        <div className="text-xl font-semibold mb-5">About Company</div>
-        <div className="flex justify-between mb-3">
-          <div className="flex gap-2 items-center">
-            <div className={`p-3 rounded-xl ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-              {props.company && <img className="h-7" src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
-            </div>
-            <div className="flex flex-col">
-              <div className="font-medium text-2xl">{props.company}</div>
-              <div className={`${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>10k+ viewed </div>
-            </div>
-          </div>
-          <Link to={`/company/${props.company}`}>
-            <Button color="blue.4" size="sm" variant='light'>Know More</Button>
-          </Link>
-        </div>
-        <div className={`${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'} text-justify`}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo illum itaque,
-          commodi animi repellat atque laudantium laborum, dicta cupiditate vitae debitis tenetur iure! Sed odit qui ab inventore,
-          harum doloribus.</div>
-      </div> */}
     </div>
   )
 }
