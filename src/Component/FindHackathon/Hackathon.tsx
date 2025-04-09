@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import HackaSort from "./HackaSort";
 import HackathonCard from "./HackathonCard";
 import { getAllHackathons } from "../../Services/HackathonService";
+import { sortHackathonsByDaysLeft } from "./HackathonCard";
 
 const Hackathon = () => {
   const [hackathonList, setHackathonList] = useState<any[]>([]);
@@ -23,7 +24,7 @@ const Hackathon = () => {
         <HackaSort />
       </div>
       <div className='flex flex-wrap gap-5 mt-10 justify-center'>
-        {hackathonList.map((hackathon: any, index: any) => (
+        {sortHackathonsByDaysLeft(hackathonList).map((hackathon: any, index: any) => (
           <HackathonCard key={index} {...hackathon} />
         ))}
       </div>

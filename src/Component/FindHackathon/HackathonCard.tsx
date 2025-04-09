@@ -8,7 +8,6 @@ const HackathonCard = (props: any) => {
   const { isDarkMode } = useTheme();
 
   const daysLeft = calculateDaysLeft(props.eventDate);
-  console.log(daysLeft);
 
   if (daysLeft < 0) {
     deleteHackathon(props.id);
@@ -65,6 +64,10 @@ const HackathonCard = (props: any) => {
       </div>
     </Link>
   );
+};
+
+export const sortHackathonsByDaysLeft = (hackathons: any[]) => {
+  return hackathons.sort((a, b) => calculateDaysLeft(a.eventDate) - calculateDaysLeft(b.eventDate));
 };
 
 export default HackathonCard;

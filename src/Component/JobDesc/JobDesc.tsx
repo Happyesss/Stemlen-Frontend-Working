@@ -85,11 +85,20 @@ const JobDesc = (props: any) => {
             </Link>
           )}
           {props.applyUrl && (
-            <a href={props.applyUrl} target="_blank" rel="noopener noreferrer">
-              <Button color="blue.4" size="sm" variant="light">
-                Apply Link
-              </Button>
-            </a>
+            <Button
+              color="blue.4"
+              size="sm"
+              variant="light"
+              onClick={() => {
+                if (props.applyUrl) {
+                  window.open(props.applyUrl, "_blank", "noopener noreferrer");
+                } else {
+                  alert("Apply URL is not available.");
+                }
+              }}
+            >
+              Apply Link
+            </Button>
           )}
           {
             !props.edit && applied && <Button color="blue.4" size="sm" variant='transparent'>Applied</Button>

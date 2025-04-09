@@ -50,11 +50,18 @@ const HackathonDesc = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 items-center sm-mx:mt-4">
-          <a href={hackathon.applyUrl} target="_blank" rel="noopener noreferrer">
-            <button className="bg-blue-400 text-white px-4 py-2 rounded-lg sm-mx:px-3 sm-mx:py-1 xs-mx:px-2 xs-mx:py-1">
-              Apply
-            </button>
-          </a>
+          <button
+            className="bg-blue-400 text-white px-4 py-2 rounded-lg sm-mx:px-3 sm-mx:py-1 xs-mx:px-2 xs-mx:py-1"
+            onClick={() => {
+              if (hackathon.applyUrl) {
+                window.open(hackathon.applyUrl, "_blank", "noopener noreferrer");
+              } else {
+                alert("Apply URL is not available.");
+              }
+            }}
+          >
+            Apply
+          </button>
         </div>
       </div>
       <Divider my="xl" color='dark' />
