@@ -1,17 +1,20 @@
 import { ActionIcon, Divider } from "@mantine/core";
 import { card } from "../../assets/Data/HackaDescData";
 import { IconListCheck } from "@tabler/icons-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getHackathon } from "../../Services/HackathonService";
 //@ts-ignore
 import DOMPurify from "dompurify"; // Prevents any XSS attack
 import { useTheme } from "../../ThemeContext";
+import { useSelector } from "react-redux";
 
 const HackathonDesc = () => {
   const { id } = useParams();
   const [hackathon, setHackathon] = useState<any>(null);
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
+  const user = useSelector((state: any) => state.user);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,6 +22,18 @@ const HackathonDesc = () => {
       .then((data: any) => setHackathon(data))
       .catch((error: any) => console.error(error));
   }, [id]);
+
+  const handleApply = (event: React.MouseEvent) => {
+    event.preventDefault();
+    
+    if (!user || !user.id) {
+      navigate("/login");
+      return;
+    }
+    
+    // Open application link in new tab for authenticated users
+    window.open(hackathon.applyUrl, "_blank", "noopener,noreferrer");
+  };
 
   if (!hackathon) {
     return <div>Loading...</div>;
@@ -50,18 +65,12 @@ const HackathonDesc = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 items-center sm-mx:mt-4">
-          <button
-            className="bg-blue-400 text-white px-4 py-2 rounded-lg sm-mx:px-3 sm-mx:py-1 xs-mx:px-2 xs-mx:py-1"
-            onClick={() => {
-              if (hackathon.applyUrl) {
-                window.open(hackathon.applyUrl, "_blank", "noopener noreferrer");
-              } else {
-                alert("Apply URL is not available.");
-              }
-            }}
-          >
-            Apply
-          </button>
+        <button 
+          className="bg-blue-400 text-white px-4 py-2 rounded-lg sm-mx:px-3 sm-mx:py-1 xs-mx:px-2 xs-mx:py-1"
+          onClick={handleApply}
+        >
+          Apply
+        </button>
         </div>
       </div>
       <Divider my="xl" color='dark' />

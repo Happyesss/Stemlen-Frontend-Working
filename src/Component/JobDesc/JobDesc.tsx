@@ -1,6 +1,6 @@
 import { ActionIcon, Button, Divider } from "@mantine/core";
 import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { card } from "../../assets/Data/JobDescData";
 //@ts-ignore
 import DOMPurify from 'dompurify';
@@ -19,6 +19,7 @@ const JobDesc = (props: any) => {
   const dispatch = useDispatch();
   const profile = useSelector((state: any) => state.profile);
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
 
   const handleSaveJob = () => {
     let savedJobs = Array.isArray(profile.savedJobs) ? [...profile.savedJobs] : [];
@@ -47,6 +48,18 @@ const JobDesc = (props: any) => {
     }).catch((err) => {
       errorNotification(err.response.data.errorMessage, "Error");
     });
+  };
+
+  const handleApplyLink = (event: React.MouseEvent) => {
+    event.preventDefault();
+    
+    if (!user || !user.id) {
+      navigate("/login");
+      return;
+    }
+    
+    // If logged in, open application link
+    window.open(props.applyUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -85,21 +98,15 @@ const JobDesc = (props: any) => {
             </Link>
           )}
           {props.applyUrl && (
-            <Button
-              color="blue.4"
-              size="sm"
-              variant="light"
-              onClick={() => {
-                if (props.applyUrl) {
-                  window.open(props.applyUrl, "_blank", "noopener noreferrer");
-                } else {
-                  alert("Apply URL is not available.");
-                }
-              }}
-            >
-              Apply Link
-            </Button>
-          )}
+          <Button 
+            color="blue.4" 
+            size="sm" 
+            variant="light"
+            onClick={handleApplyLink}
+          >
+            Apply Link
+          </Button>
+        )}
           {
             !props.edit && applied && <Button color="blue.4" size="sm" variant='transparent'>Applied</Button>
           }

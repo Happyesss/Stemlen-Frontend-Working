@@ -35,37 +35,37 @@ const JobCard = (props: any) => {
 
   return (
     <Link to={`/jobs/${props.id}`} className={`flex flex-col gap-3 rounded-xl p-4 w-72 hover:shadow-[0_0_5px_1px_blue] ${isDarkMode ? 'bg-cape-cod-900 !shadow-blue-300' : 'bg-white !shadow-gray-300'}`}>
-    <div className="flex justify-between">
-      <div className="flex gap-2 items-center">
-        <div className={`p-2 rounded-md ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-        {props.iconImage ? (
-    <img
-      className="h-7 w-7 object-contain"
-      src={`data:image/png;base64,${props.iconImage}`}
-      alt={`${props.company} logo`}
-    />
-  ) : (
-    <img
-      className="h-7 w-7 object-contain"
-      src={require("../../assets/images/logo.png")}
-      alt="Default logo"
-    />
-  )}</div>
-        <div>
-          <div className="font-semibold">{props.jobTitle}</div>
-          <div className={`text-sm ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>
-            {props.company} 
-            {props.applyUrl ? "" : ` • ${props.applicants ? props.applicants.length : 0} Applicants`}
+      <div className="flex justify-between">
+        <div className="flex gap-2 items-center">
+          <div className={`p-2 rounded-md ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
+            {props.iconImage ? (
+              <img
+                className="h-7 w-7 object-contain"
+                src={`data:image/png;base64,${props.iconImage}`}
+                alt={`${props.company} logo`}
+              />
+            ) : (
+              <img
+                className="h-7 w-7 object-contain"
+                src={require("../../assets/images/logo.png")}
+                alt="Default logo"
+              />
+            )}</div>
+          <div>
+            <div className="font-semibold">{props.jobTitle}</div>
+            <div className={`text-sm ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`}>
+              {props.company}
+              {props.applyUrl ? "" : ` • ${props.applicants ? props.applicants.length : 0} Applicants`}
+            </div>
           </div>
         </div>
+        {profile.savedJobs?.includes(props.id) ? (
+          <IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-blue-400" stroke={1.5} />
+        ) : (
+          <IconBookmark onClick={handleSaveJob} className={`cursor-pointer hover:text-blue-400 ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`} />
+        )}
       </div>
-      {profile.savedJobs?.includes(props.id) ? (
-        <IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-blue-400" stroke={1.5} />
-      ) : (
-        <IconBookmark onClick={handleSaveJob} className={`cursor-pointer hover:text-blue-400 ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'}`} />
-      )}
-    </div>
-  
+
 
       <div className={`flex gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:rounded-lg text-xs ${isDarkMode ? '[&>div]:bg-cape-cod-800 [&>div]:text-blue-400' : '[&>div]:bg-gray-200 [&>div]:text-blue-600'}`}>
         <div className="inline-flex items-center">
