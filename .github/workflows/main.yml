@@ -3,7 +3,7 @@ name: Frontend Deployment
 on:
   push:
     branches:
-      - main
+      - main  
 
 jobs:
   deploy:
@@ -11,33 +11,27 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Set CI to false
-        run: echo "CI=false" >> $GITHUB_ENV
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.14.0'
+          node-version: '22.2.0'  # Or your desired version
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install --legacy-peer-deps  # avoid dependency resolution errors
 
       - name: Build React App
-        run: npm run build
+        run: |
+          CI=false npm run build  # disables "treat warnings as errors"
 
-      - name: Add SSH Key to Agent
-        uses: webfactory/ssh-agent-action@v0.5.3
+      - name: Add SSH Private Key
+        uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Add DigitalOcean droplet to known hosts
+      - name: Deploy via SCP
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H 68.183.94.76 >> ~/.ssh/known_hosts
-
-      - name: Deploy to DigitalOcean via SCP
-        run: |
-          ssh root@68.183.94.76 "rm -rf /var/www/html/yourapp/*"
-          scp -r ./build/* root@68.183.94.76:/var/www/html/yourapp/
+          ssh -o StrictHostKeyChecking=no root@YOUR_SERVER_IP "rm -rf /var/www/html/yourapp/*"
+          scp -r ./build/* root@YOUR_SERVER_IP:/var/www/html/yourapp/
