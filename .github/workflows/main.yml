@@ -1,0 +1,43 @@
+name: Frontend Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set CI to false
+        run: echo "CI=false" >> $GITHUB_ENV
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Add SSH Key to Agent
+        uses: webfactory/ssh-agent-action@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add DigitalOcean droplet to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 68.183.94.76 >> ~/.ssh/known_hosts
+
+      - name: Deploy to DigitalOcean via SCP
+        run: |
+          ssh root@68.183.94.76 "rm -rf /var/www/html/yourapp/*"
+          scp -r ./build/* root@68.183.94.76:/var/www/html/yourapp/
