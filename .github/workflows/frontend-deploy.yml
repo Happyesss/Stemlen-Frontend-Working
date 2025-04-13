@@ -6,28 +6,33 @@ on:
       - main  
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.14.0'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install Dependencies
+        run: |
+          npm install
 
       - name: Build React App
-        run: npm run build
+        run: |
+          npm run build
 
-      - name: Deploy to DigitalOcean Droplet
+      - name: Deploy to Droplet via SCP
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add <(echo "$SSH_PRIVATE_KEY")
-          scp -r build/* root@68.183.94.76:/var/www/html
+
+          # Clean old files and transfer new build to your droplet
+          ssh root@68.183.94.76 "rm -rf /var/www/html/yourapp/*"
+          scp -r ./build/* root@68.183.94.76:/var/www/html/yourapp/
