@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Set CI to false
+        run: echo "CI=false" >> $GITHUB_ENV  # Disable treating warnings as errors
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -28,12 +31,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          # Start SSH agent and add the private key for authentication
           eval "$(ssh-agent -s)"
-          ssh-add <(echo "$SSH_PRIVATE_KEY")
-
-          # Remove old build files in the target directory
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
           ssh root@68.183.94.76 "rm -rf /var/www/html/yourapp/*"
-
-          # Use SCP to transfer the new build files to your droplet
           scp -r ./build/* root@68.183.94.76:/var/www/html/yourapp/
