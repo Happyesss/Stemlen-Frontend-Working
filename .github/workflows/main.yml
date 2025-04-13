@@ -33,5 +33,5 @@ jobs:
 
       - name: Deploy via SCP
         run: |
-          ssh -o StrictHostKeyChecking=no root@YOUR_SERVER_IP "rm -rf /var/www/html/yourapp/*"
-          scp -r ./build/* root@YOUR_SERVER_IP:/var/www/html/yourapp/
+          ssh -o StrictHostKeyChecking=no root@68.183.94.76 "rm -rf /var/www/html/yourapp/*"
+          scp -r ./build/* root@68.183.94.76:/var/www/html/yourapp/
