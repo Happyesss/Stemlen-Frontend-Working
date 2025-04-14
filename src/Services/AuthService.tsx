@@ -1,7 +1,7 @@
 import axios from "axios";
 import { removeUser } from "../Slices/UserSlices";
 
-const Base_URL = "https://stemlen.com/auth/";
+const Base_URL = "https://api.stemlen.com/auth/";
 
 const loginUser = async (login: any) => {
     return axios
@@ -19,7 +19,7 @@ const navigateToLogin = (navigate:any) => {
 }
 
 const oauthLogin = async (provider: string) => {
-  window.location.href = `https://stemlen.com/oauth2/authorization/${provider}`;
+  window.location.href = `https://api.stemlen.com/oauth2/authorization/${provider}`;
 };
 
 export { loginUser, navigateToLogin, oauthLogin };

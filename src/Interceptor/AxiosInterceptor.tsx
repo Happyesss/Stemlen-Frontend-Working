@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://stemlen-backend-working.onrender.com"
+    baseURL: "https://api.stemlen.com"
     });
 
 axiosInstance.interceptors.request.use(
