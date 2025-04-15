@@ -3,17 +3,21 @@ import HackaSort from "./HackaSort";
 import HackathonCard from "./HackathonCard";
 import { getAllHackathons } from "../../Services/HackathonService";
 import { sortHackathonsByDaysLeft } from "./HackathonCard";
+import { Loader } from "@mantine/core"; // Import a loader component
 
 const Hackathon = () => {
   const [hackathonList, setHackathonList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     getAllHackathons()
       .then((res) => {
         setHackathonList(res);
+        setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false); // Ensure loading stops even if there's an error
       });
   }, []);
 
@@ -24,9 +28,15 @@ const Hackathon = () => {
         <HackaSort />
       </div>
       <div className='flex flex-wrap gap-5 mt-10 justify-center'>
-        {sortHackathonsByDaysLeft(hackathonList).map((hackathon: any, index: any) => (
-          <HackathonCard key={index} {...hackathon} />
-        ))}
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <Loader size="lg" color="blue" variant="dots" /> {/* Attractive loader */}
+          </div>
+        ) : (
+          sortHackathonsByDaysLeft(hackathonList).map((hackathon: any, index: any) => (
+            <HackathonCard key={index} {...hackathon} />
+          ))
+        )}
       </div>
     </div>
   );
