@@ -76,8 +76,7 @@ const formatDate = (dateString: string): string => {
 
     const diffTime = event.getTime() - currentDate.getTime();
     const diffDays = diffTime / (1000 * 60 * 60 * 24); 
-
-    console.log("Diff Days:", diffDays);
+    
     return diffDays;
 };
 
@@ -90,7 +89,6 @@ const formatDate = (dateString: string): string => {
       if (!response.ok) {
         throw new Error('Failed to delete hackathon');
       }
-      console.log(`Hackathon with ID ${hackathonId} deleted successfully.`);
     } catch (error) {
       console.error('Error deleting hackathon:', error);
     }
