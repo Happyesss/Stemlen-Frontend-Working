@@ -41,8 +41,8 @@ const Jobs = () => {
 
   useEffect(() => {
     let filtered = jobList;
-
-    if (filter["Job Title"] && filter["Job Title"].length > 0) {
+  
+    if (filter["Job Title"]?.length) {
       filtered = filtered.filter(
         (job: any) =>
           job.jobTitle &&
@@ -52,7 +52,8 @@ const Jobs = () => {
           )
       );
     }
-    if (filter.Location && filter.Location.length > 0) {
+  
+    if (filter.Location?.length) {
       filtered = filtered.filter(
         (job: any) =>
           job.location &&
@@ -63,17 +64,18 @@ const Jobs = () => {
           )
       );
     }
-    if (filter.Experience && filter.Experience.length > 0) {
+  
+    if (filter.Experience?.length) {
       filtered = filtered.filter(
         (job: any) =>
           job.experience &&
-          filter.Experience.some(
-            (x: any) =>
-              job.experience?.toLowerCase().includes(x.toLowerCase())
+          filter.Experience.some((x: any) =>
+            job.experience?.toLowerCase().includes(x.toLowerCase())
           )
       );
     }
-    if (filter["Job Type"] && filter["Job Type"].length > 0) {
+  
+    if (filter["Job Type"]?.length) {
       filtered = filtered.filter(
         (job: any) =>
           job.jobType &&
@@ -83,18 +85,17 @@ const Jobs = () => {
           )
       );
     }
-    if (filter.salary && filter.salary.length > 0) {
+  
+    if (filter.salary?.length) {
       filtered = filtered.filter(
         (job: any) =>
           filter.salary[0] <= job.packageOffered && job.packageOffered <= filter.salary[1]
       );
     }
-
-    // Shuffle the filtered jobs randomly
-    filtered = filtered.sort(() => Math.random() - 0.5);
-
+  
+    // Don't shuffle here, just set the filtered jobs
     setFilteredJobs(filtered);
-  }, [filter, jobList]);
+  }, [filter, jobList]);  
 
   return (
     <div className='p-5'>
