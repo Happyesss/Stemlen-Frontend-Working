@@ -104,7 +104,7 @@ const Jobs = () => {
           <JobCard key={index} {...job} />
         ))}
       </div>
-      <div className='text-base font-semibold text-center text-blue-400 bs-mx:text-lg'>
+      <div className='text-base font-semibold text-center text-blue-400 mt-10'>
         Note: You have reached the end of the page. Job recommendations are tailored based on your location.
       </div>
     </div>
