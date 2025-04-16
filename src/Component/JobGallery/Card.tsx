@@ -31,7 +31,19 @@ const Card = (props: any) => {
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className={`p-2 rounded-md ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-            {props.company && <img className="h-7" src={require(`../../assets/Icons/${props.company}.png`)} alt="" />}
+            {props.iconImage ? (
+              <img
+                className="h-7 w-7 object-contain"
+                src={`data:image/png;base64,${props.iconImage}`}
+                alt={`${props.company} logo`}
+              />
+            ) : (
+              <img
+                className="h-7 w-7 object-contain"
+                src={require("../../assets/images/logo.png")}
+                alt="Default logo"
+              />
+            )}
           </div>
           <div>
             <div className="font-semibold">{props.jobTitle}</div>

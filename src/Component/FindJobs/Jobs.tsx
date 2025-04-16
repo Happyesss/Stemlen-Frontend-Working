@@ -90,6 +90,9 @@ const Jobs = () => {
       );
     }
 
+    // Shuffle the filtered jobs randomly
+    filtered = filtered.sort(() => Math.random() - 0.5);
+
     setFilteredJobs(filtered);
   }, [filter, jobList]);
 
