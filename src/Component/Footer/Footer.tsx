@@ -33,9 +33,12 @@ const Footer = () => {
               Grow together like a plant stem, reaching new heights.
             </p>
             <div className="flex gap-4">
-              {[IconBrandLinkedin, IconBrandGmail].map((Icon, index) => (
-                <button
+              {[{ Icon: IconBrandLinkedin, url: "https://www.linkedin.com" }, { Icon: IconBrandGmail, url: "mailto:stemlen.co@gmail.com" }].map(({ Icon, url }, index) => (
+                <a
                   key={index}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`p-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:text-white ${
                     isDarkMode 
                       ? 'text-gray-400 hover:bg-opacity-100' 
@@ -43,7 +46,7 @@ const Footer = () => {
                   }`}
                 >
                   <Icon size={24} />
-                </button>
+                </a>
               ))}
             </div>
           </div>

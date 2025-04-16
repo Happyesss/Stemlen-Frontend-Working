@@ -59,8 +59,8 @@ const footerLinks = [
     {
       title: "Support",
       links: [
-        { name: "Help & Support", url: "/help-support" },
-        { name: "Feedback", url: "/feedback" },
+        { name: "Help & Support", url: "mailto:stemlen.co@gmail.com" },
+        { name: "Feedback", url: "mailto:stemlen.co@gmail.com" },
         { name: "FAQs", url: "/about-us" }
       ]
     }
