@@ -17,12 +17,10 @@ const AtsChecker = ({ jobId }: { jobId: string }) => {
 
   // Fetch Job Description
   useEffect(() => {
-    console.log("Job ID from props:", jobId);
 
     if (jobId) {
       getJob(jobId)
         .then((job) => {
-          console.log("Fetched Job Description:", job);
           setJobDescription(job?.description || "No description available");
           setSkillsRequired(job?.skillsRequired || []);
         })
@@ -33,10 +31,9 @@ const AtsChecker = ({ jobId }: { jobId: string }) => {
   // Handle Resume Upload
   const handleResumeUpload = (file: File | null) => {
     if (file) {
-      console.log("Selected Resume:", file);
       setResume(file);
     } else {
-      console.error("No file selected");
+      setResume(null);
     }
   };
 
@@ -49,28 +46,16 @@ const AtsChecker = ({ jobId }: { jobId: string }) => {
 
     setLoading(true);
 
-    console.log("Sending Job Description:", jobDescription);
-    console.log("Sending Skills Required:", skillsRequired);
-
     const formData = new FormData();
     formData.append("file", resume, resume.name);
     formData.append("job_description", jobDescription);
     formData.append("skills_required", JSON.stringify(skillsRequired));
 
-    console.log("Form Data being sent:", {
-      resumeName: resume.name,
-      jobDescription,
-      skillsRequired,
-    });
-
     try {
       const response = await axios.post("https://ats-api-m949.onrender.com/analyze-resume", formData);
 
-      console.log("API Response:", response.data);
-
       if (response.data && response.data.analysis) {
         const parsedAnalysis = JSON.parse(response.data.analysis);
-        console.log("Parsed Analysis:", parsedAnalysis);
         setParsedAnalysis(parsedAnalysis);
 
         if (parsedAnalysis.overall_match_percentage) {
@@ -78,7 +63,6 @@ const AtsChecker = ({ jobId }: { jobId: string }) => {
           const score = parseInt(matchPercentage.match(/\d+/)?.[0] || "0", 10);
 
           setAtsScore(score);
-          console.log("ATS Score:", score);
         } else {
           console.warn("ATS Score not found in parsed analysis:", parsedAnalysis);
         }
