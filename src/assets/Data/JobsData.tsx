@@ -2,7 +2,7 @@ import { IconBriefcase, IconMapPin, IconSearch, IconTie } from "@tabler/icons-re
 
 const dropdownData = [
   { title: "Job Title", icon: IconSearch, options: ['Designer', 'Developer', 'Data Analyst', 'Sales Executive', 'Content Writer'] },
-  { title: "Location", icon: IconMapPin, options: ['Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Noida'] },
+  { title: "Location", icon: IconMapPin, options: ['Remote','Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Noida'] },
   { title: "Experience", icon: IconTie, options: ['Entry Level', 'Intermediate', 'Expert'] },
   { title: "Job Type", icon: IconBriefcase, options: ['Full Time', 'Part Time', 'Contract', 'Freelance', 'Internship'] }
 ];
