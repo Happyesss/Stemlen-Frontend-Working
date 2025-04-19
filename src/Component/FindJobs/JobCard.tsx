@@ -88,7 +88,9 @@ const JobCard = (props: any) => {
       <Divider size="xs" color={isDarkMode ? 'cape-cod.6' : 'gray.6'} />
 
       <div className="flex justify-between">
-        <div className={`font-semibold ${isDarkMode ? 'text-cape-cod-200' : 'text-gray-700'}`}>&#8377; {props.packageOffered} K / month</div>
+        <div className={`font-semibold ${isDarkMode ? 'text-cape-cod-200' : 'text-gray-700'}`}>
+          {props.packageOffered > 0 ? `₹ ${props.packageOffered} K / month` : "Not mentioned"}
+        </div>
         <div className={`flex gap-1 text-xs items-center ${isDarkMode ? 'text-cape-cod-400' : 'text-gray-500'}`}>
           <IconClockHour3 className="h-5 w-5" stroke={1.5} /> {timeAgo(props.postTime)}
         </div>

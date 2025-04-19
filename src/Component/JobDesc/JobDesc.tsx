@@ -125,7 +125,10 @@ const JobDesc = (props: any) => {
               <item.icon className="h-4/5 w-4/5" stroke={1.5} />
             </ActionIcon>
             <div className={`text-sm ${isDarkMode ? 'text-cape-cod-300' : 'text-gray-500'} sm-mx:text-xs xs-mx:text-[10px]`}>{item.name}</div>
-            <div className="font-semibold sm-mx:text-sm xs-mx:text-xs">{props ? props[item.id] : "NA"}{item.id == "packageOffered" && <>K</>}</div>
+            <div className="font-semibold sm-mx:text-sm xs-mx:text-xs">
+              {props ? props[item.id] : "NA"}
+              {item.id === "packageOffered" && (props[item.id] > 0 ? <>K</> : <>Not mentioned</>)}
+            </div>
           </div>
           )}
       </div>

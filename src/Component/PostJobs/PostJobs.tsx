@@ -151,7 +151,7 @@ const PostJobs = () => {
         </div>
         <div className={`flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:w-full sm-mx:flex-wrap  ${isDarkMode ? ' text-cape-cod-100 [&_input]:bg-cape-cod-900 [&_input]:!text-cape-cod-100 [&_input]:border-cape-cod-900 ' : 'text-cape-cod-900 [&_input]:!text-cape-cod-900'}`}>
           <SelectInput form={form} name="location" {...select[4]} />
-          <NumberInput {...form.getInputProps("packageOffered")} withAsterisk label="packageOffered" min={1} max={500} clampBehavior="strict" placeholder="Enter Salary" hideControls styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000' } }} />
+          <NumberInput {...form.getInputProps("packageOffered")} withAsterisk label="packageOffered" min={0} max={500} clampBehavior="strict" placeholder="Enter Salary" hideControls styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000' } }} />
         </div>
         <FileInput {...form.getInputProps("iconImage")} withAsterisk label="Icon Image" placeholder="Upload Icon Image" accept="image/png,image/jpeg" styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000', borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
         <TagsInput {...form.getInputProps("skillsRequired")} withAsterisk label="Skills" placeholder="Enter the skills" splitChars={[",", " ", "|"]} clearable acceptValueOnBlur styles={{ input: { backgroundColor: isDarkMode ? '#2c3534' : '#fff', color: isDarkMode ? '#fff' : '#000',borderColor: isDarkMode ? "transparent" : "#d1d5db" } }} />
