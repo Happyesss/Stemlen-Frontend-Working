@@ -11,11 +11,17 @@ const ApplyJobComp = (props: any) => {
       <div className="flex justify-between sm-mx:flex-wrap sm-mx:items-center">
         <div className="flex gap-2 items-center sm-mx:flex-wrap sm-mx:gap-1">
           <div className={`p-3 rounded-xl sm-mx:p-2 ${isDarkMode ? 'bg-cape-cod-800' : 'bg-gray-200'}`}>
-            {props.company && (
+            {props.iconImage ? (
               <img
                 className="h-14 sm-mx:h-12 xs-mx:h-10"
-                src={require(`../../assets/Icons/${props.company}.png`)}
-                alt=""
+                src={`data:image/png;base64,${props.iconImage}`}
+                alt={`${props.company} logo`}
+              />
+            ) : (
+              <img
+                className="h-14 sm-mx:h-12 xs-mx:h-10"
+                src={require("../../assets/images/logo.png")}
+                alt="Default logo"
               />
             )}
           </div>
