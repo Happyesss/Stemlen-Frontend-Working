@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Combobox, useCombobox } from '@mantine/core';
 import { IconAdjustments } from '@tabler/icons-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UpdateSort } from '../../Slices/SortSlice';
 
 const opt = ['Recent posted', 'Relevent', 'Salary(High - Low)', 'Salary(Low - High)'];
@@ -9,13 +9,10 @@ const talentSort = ['Relevent', 'Experience(High - Low)', 'Experience(Low - High
 
 const Sort=(props:any)=> {
   const dispatch = useDispatch();
-  const [selectedItem, setSelectedItem] = useState<string | null>('Recent posted');
+  const sortValue = useSelector((state: any) => state.sort);
+  const [selectedItem, setSelectedItem] = useState<string | null>(sortValue || 'Recent posted');
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
-  });
-  // Initialize with "Recent posted" sort
-  useState(() => {
-    dispatch(UpdateSort('Recent posted'));
   });
 
   const options = props.sort=="job"?opt.map((item) => (

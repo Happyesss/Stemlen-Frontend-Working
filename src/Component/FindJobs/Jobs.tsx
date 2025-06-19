@@ -12,19 +12,22 @@ const Jobs = () => {
   const [jobList, setJobList] = useState<any[]>([]);
   const filter = useSelector((state: any) => state.filter);
   const [filteredJobs, setFilteredJobs] = useState<any[]>([]);
-
   useEffect(() => {
     dispatch(resetFilter());
     dispatch(resetSort());
     getAllJobs()
       .then((res) => {
-        setJobList(res.filter((job: any) => job.jobStatus === 'ACTIVE'));
+        const activeJobs = res.filter((job: any) => job.jobStatus === 'ACTIVE');
+        // Apply "Recent posted" sort right after fetching the jobs
+        setJobList(activeJobs.sort((a:any, b:any) => 
+          new Date(b.postTime).getTime() - new Date(a.postTime).getTime()
+        ));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [dispatch]);
-  useEffect(() => {
+  }, [dispatch]);  useEffect(() => {
+    console.log("Sort value changed:", sort);
     if (sort === 'Recent posted') {
       setJobList([...jobList].sort((a:any,b:any)=>new Date(b.postTime).getTime()-new Date(a.postTime).getTime()));
     }
@@ -37,7 +40,7 @@ const Jobs = () => {
     else{
       setJobList([...jobList].sort(() => Math.random() - 0.5));
     }
-  }, [sort]);
+  }, [sort, jobList.length]);
 
   useEffect(() => {
     let filtered = jobList;
