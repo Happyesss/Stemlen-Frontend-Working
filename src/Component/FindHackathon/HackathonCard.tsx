@@ -9,11 +9,6 @@ const HackathonCard = (props: any) => {
 
   const daysLeft = calculateDaysLeft(props.eventDate);
 
-  if (daysLeft < 0) {
-    deleteHackathon(props.id);
-    return null;
-  }
-
   return (
     <Link to={`/hackathon/${props.id}`} className={`relative flex flex-col gap-1 rounded-xl p-2 w-72 hover:shadow-[0_0_5px_1px_blue] transition-all ${isDarkMode ? 'bg-cape-cod-900 !shadow-blue-300' : 'bg-white !shadow-gray-300'}`}>
       <div className="w-full h-[120px] rounded-lg overflow-hidden">
@@ -52,14 +47,17 @@ const HackathonCard = (props: any) => {
       <Text className={`!text-xs text-justify ${isDarkMode ? '!text-cape-cod-300' : '!text-gray-500'}`} lineClamp={3}>
         {props.about}
       </Text>
-      <Divider size="xs" color={isDarkMode ? 'cape-cod.6' : 'gray.6'} />
-
-      <div className="flex justify-between">
+      <Divider size="xs" color={isDarkMode ? 'cape-cod.6' : 'gray.6'} />      <div className="flex justify-between">
         <div className={`font-semibold p-1 rounded-lg ${isDarkMode ? 'text-cape-cod-200' : 'text-gray-700'}`}>
           Prize Money : {props.prize}
         </div>
         <div className={`flex gap-1 text-xs items-center ${isDarkMode ? 'text-cape-cod-400' : 'text-gray-500'}`}>
-          <IconClockHour3 className="h-5 w-5" stroke={1.5} /> {daysLeft} Days Left
+          <IconClockHour3 className="h-5 w-5" stroke={1.5} /> 
+          {daysLeft >= 0 ? (
+            `${daysLeft} Days Left`
+          ) : (
+            <span className="text-red-500 font-semibold">Event Ended</span>
+          )}
         </div>
       </div>
     </Link>

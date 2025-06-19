@@ -4,14 +4,18 @@ import { IconAdjustments } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
 import { UpdateSort } from '../../Slices/SortSlice';
 
-const opt = ['Relevent', 'Recent posted', 'Salary(High - Low)', 'Salary(Low - High)'];
+const opt = ['Recent posted', 'Relevent', 'Salary(High - Low)', 'Salary(Low - High)'];
 const talentSort = ['Relevent', 'Experience(High - Low)', 'Experience(Low - High)'];
 
 const Sort=(props:any)=> {
   const dispatch = useDispatch();
-  const [selectedItem, setSelectedItem] = useState<string | null>('Relevent');
+  const [selectedItem, setSelectedItem] = useState<string | null>('Recent posted');
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+  // Initialize with "Recent posted" sort
+  useState(() => {
+    dispatch(UpdateSort('Recent posted'));
   });
 
   const options = props.sort=="job"?opt.map((item) => (
@@ -26,8 +30,6 @@ const Sort=(props:any)=> {
 
   return (
     <>
-      
-
       <Combobox
         store={combobox}
         width={250}
